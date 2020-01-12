@@ -18,6 +18,7 @@ $sqlite = Test::SQLite->new( database => 't/test.db' );
 ok -e $sqlite->testdb, 'create testdb from database';
 
 my $dbh = DBI->connect( $sqlite->dsn, '', '' );
+isa_ok $dbh, 'DBI::db';
 my $sql = 'SELECT name FROM account';
 my $sth = $dbh->prepare($sql);
 $sth->execute;
