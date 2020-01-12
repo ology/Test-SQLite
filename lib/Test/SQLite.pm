@@ -24,11 +24,11 @@ Test::SQLite - SQLite setup/teardown for tests
     database => '/some/where/production.db',
   );
 
+  my $dbh = DBI->connect($sqlite->dsn, '', '');
+
   $sqlite = Test::SQLite->new(
     schema => '/some/where/schema.sql',
   );
-
-  my $dbh = DBI->connect($sqlite->dsn, '', '');
 
   $dbh = $sqlite->dbh;
 
