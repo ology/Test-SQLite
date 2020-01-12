@@ -116,9 +116,17 @@ sub _build__database {
         my $dbh = DBI->connect( 'dbi:SQLite:dbname=' . $filename )
             or die "Failed to open DB $filename";
 
+        my $sql = '';
         while ( my $line = readline($schema) ) {
-            $dbh->do($line)
-                or die 'SQLite Error(' . $self->schema . '): ' . $dbh->errstr;
+            if ( $line =~ /;/ ) {
+                $sql .= $line;
+                $dbh->do($sql)
+                    or die 'SQLite Error(' . $self->schema . '): ' . $dbh->errstr;
+                $sql = '';
+            }
+            else {
+                $sql .= $line;
+            }
         }
 
         $dbh->disconnect;
