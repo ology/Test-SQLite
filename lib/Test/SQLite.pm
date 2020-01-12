@@ -118,6 +118,7 @@ sub _build__database {
 
         my $sql = '';
         while ( my $line = readline($schema) ) {
+            next if $line =~ /^\s*--/;
             if ( $line =~ /;/ ) {
                 $sql .= $line;
                 $dbh->do($sql)
