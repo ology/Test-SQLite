@@ -1,6 +1,9 @@
 Revision history for Test-SQLite
 
 {{$NEXT}}
+    - Remove redundant NAME section.
+
+0.0101 2020-01-12 14:11:57
     - Improve documentation.
     - Remove unused code.
     - Reuse the ->dsn when building the ->dbh.
