@@ -3,6 +3,7 @@ Revision history for Test-SQLite
 {{$NEXT}}
     - Improve documentation.
     - Remove unused code.
+    - Reuse the ->dsn when building the ->dbh.
 
 0.0100 2020-01-12 13:56:21
     - Tweaked heavily based on suggestions from KP.
