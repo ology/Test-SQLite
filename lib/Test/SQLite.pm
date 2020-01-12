@@ -93,7 +93,7 @@ has dbh => (
 
 sub _build_dbh {
     my ($self) = @_;
-    return DBI->connect( 'dbi:SQLite:dbname=' . $self->_database->filename );
+    return DBI->connect( 'dbi:SQLite:dbname=' . $self->_database->filename, '', '' );
 }
 
 has _database => (
