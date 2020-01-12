@@ -2,13 +2,12 @@ package Test::SQLite;
 
 # ABSTRACT: SQLite setup/teardown for tests
 
-our $VERSION = '0.0100';
+our $VERSION = '0.0101';
 
 use Moo;
 use strictures 2;
 
 use DBI;
-use File::Basename;
 use File::Copy;
 use File::Temp qw/ tempfile /;
 
@@ -160,7 +159,6 @@ Ensure that we are given either a B<database> or a B<schema>.
 
 sub BUILD {
     my ( $self, $args ) = @_;
-
     die 'Schema and database may not be used at the same time.'
         if $self->database and $self->schema;
 }
@@ -175,8 +173,6 @@ Kaitlyn Parkhurst <symkat@symkat.com>
 =head1 SEE ALSO
 
 L<DBI>
-
-L<File::Basename>
 
 L<File::Copy>
 
