@@ -107,7 +107,7 @@ sub _build__database {
 
     if ( $self->has_database ) {
         copy( $self->database, $filename )
-            or die 'Copy of ' . $self->database . "failed: $!";
+            or die "Can't copy " . $self->database . ": $!";
     }
     elsif ( $self->has_schema ) {
         open my $schema, '<', $self->schema
