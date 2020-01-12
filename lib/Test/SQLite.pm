@@ -29,7 +29,7 @@ Test::SQLite - SQLite setup/teardown for tests
     schema => '/some/where/schema.sql',
   );
 
-  my $dbh = DBI->connect($sqlite->dsn);
+  my $dbh = DBI->connect($sqlite->dsn, '', '');
 
   $dbh = $sqlite->dbh;
 
