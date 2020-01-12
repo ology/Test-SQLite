@@ -9,7 +9,7 @@ use Test::Exception;
 use_ok 'Test::SQLite';
 
 throws_ok {
-    Test::SQLite->new( schema => 't/test.sql', database => 't/test.db' )
+    Test::SQLite->new( schema => 'eg/test.sql', database => 'eg/test.db' )
 } qr/Schema and database may not be used at the same time/,
 'schema and database declared together';
 
