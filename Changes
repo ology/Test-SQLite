@@ -1,4 +1,5 @@
 Revision history for Test-SQLite
 
 {{$NEXT}}
+    - Tweaked heavily based on suggestions from KP.
     - Mint by Dist::Zilla.
