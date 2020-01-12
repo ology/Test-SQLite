@@ -13,7 +13,7 @@ throws_ok {
 } qr/Schema and database may not be used at the same time/,
 'schema and database declared together';
 
-my $sqlite = Test::SQLite->new( schema => 't/test.sql' );
+my $sqlite = Test::SQLite->new( schema => 'eg/test.sql' );
 ok -e $sqlite->_database, 'create test database from schema';
 
 my $dbh = DBI->connect( $sqlite->dsn, '', '' );
@@ -26,7 +26,7 @@ my $expected = [ [ 'Gene' ] ];
 is_deeply $got, $expected, 'expected data';
 $dbh->disconnect;
 
-$sqlite = Test::SQLite->new( database => 't/test.db' );
+$sqlite = Test::SQLite->new( database => 'eg/test.db' );
 ok -e $sqlite->_database, 'create test database from database';
 
 $dbh = $sqlite->dbh;
