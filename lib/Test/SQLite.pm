@@ -1,6 +1,6 @@
 package Test::SQLite;
 
-# ABSTRACT: SQLite runner for tests
+# ABSTRACT: SQLite setup/teardown for tests
 
 our $VERSION = '0.0100';
 
@@ -14,7 +14,7 @@ use File::Temp qw/ tempfile /;
 
 =head1 NAME
 
-Test::SQLite - SQLite runner for tests
+Test::SQLite - SQLite setup/teardown for tests
 
 =head1 SYNOPSIS
 
@@ -35,10 +35,10 @@ Test::SQLite - SQLite runner for tests
 
 =head1 DESCRIPTION
 
-C<Test::SQLite> is a runner for tests.  It is loosely inspired by
-L<Test::PostgreSQL> and L<Test::mysqld>, but is limited to
-setup/teardown of the B<testdb> given a B<database> or B<schema> SQL,
-and returning the database B<DBH> handle or B<DSN> connection string.
+C<Test::SQLite> is loosely inspired by L<Test::PostgreSQL> and
+L<Test::mysqld>, but is limited to setup/teardown of the B<testdb>
+given a B<database> or B<schema> SQL, and returning the database
+B<DBH> handle or B<DSN> connection string.
 
 =head1 ATTRIBUTES
 
