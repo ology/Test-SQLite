@@ -11,10 +11,6 @@ use DBI;
 use File::Copy;
 use File::Temp qw/ tempfile /;
 
-=head1 NAME
-
-Test::SQLite - SQLite setup/teardown for tests
-
 =head1 SYNOPSIS
 
   use DBI;
