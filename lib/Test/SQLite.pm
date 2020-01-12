@@ -150,7 +150,18 @@ sub _build_dbh {
 
 Create a new C<Test::SQLite> object.
 
+=head2 BUILD
+
+Insure that we are given either a B<database> or a B<schema>.
+
 =cut
+
+sub BUILD {
+    my ( $self, $args ) = @_;
+
+    die 'Either a database or a schema are required.'
+        unless $self->database or $self->schema;
+}
 
 1;
 __END__
