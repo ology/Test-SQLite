@@ -125,6 +125,7 @@ sub _build__database {
             if ( $line =~ /;/ ) {
                 $dbh->do($sql)
                     or die 'Error executing SQL for ' . $self->schema . ': ' . $dbh->errstr;
+
                 $sql = '';
             }
         }
