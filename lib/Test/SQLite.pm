@@ -122,7 +122,7 @@ sub _build__database {
             if ( $line =~ /;/ ) {
                 $sql .= $line;
                 $dbh->do($sql)
-                    or die 'SQLite Error(' . $self->schema . '): ' . $dbh->errstr;
+                    or die 'Error executing SQL for ' . $self->schema . ': ' . $dbh->errstr;
                 $sql = '';
             }
             else {
