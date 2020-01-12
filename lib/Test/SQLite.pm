@@ -49,7 +49,9 @@ The database to copy.
 =cut
 
 has database => (
-    is => 'ro',
+    is        => 'ro',
+    isa       => sub { -e $_[0] },
+    predicate => 'has_database',
 );
 
 =head2 schema
@@ -59,50 +61,10 @@ The SQL schema to create a test database.
 =cut
 
 has schema => (
-    is => 'ro',
+    is        => 'ro',
+    isa       => sub { -e $_[0] },
+    predicate => 'has_schema',
 );
-
-=head2 testdb
-
-The created test database path and filename.
-
-=cut
-
-has testdb => (
-    is        => 'lazy',
-    init_args => undef,
-);
-
-sub _build_testdb {
-    my ($self) = @_;
-
-    my ( undef, $filename ) = tempfile( TEMPLATE => 'test_XXXXXX', SUFFIX => '.db', UNLINK => 1 );
-
-    if ( $self->database ) {
-        copy( $self->database, $filename )
-            or die "Copy failed: $!";
-    }
-    elsif ( $self->schema ) {
-        open my $schema, '<', $self->schema
-            or die "Can't read " . $self->schema . ": $!";
-        my $content;
-        while ( my $line = readline($schema) ) {
-            next if $line =~ /^\s*--/;
-            $content .= $line;
-        }
-        close $schema;
-
-        my $dbh = DBI->connect( 'dbi:SQLite:dbname=' . $filename );
-        for my $command ( split( /;/, $content ) ) {
-            next if $command =~ /^\s*$/;
-            $dbh->do( $command )
-                or die 'SQLite Error(' . $self->schema . "): $command: " . $dbh->errstr;
-        }
-        undef $dbh;
-    }
-
-    return $filename;
-}
 
 =head2 dsn
 
@@ -116,12 +78,7 @@ has dsn => (
 
 sub _build_dsn {
     my ($self) = @_;
-
-    my $testdb = $self->testdb;
-
-    my $dsn = 'dbi:SQLite:dbname=' . $testdb;
-
-    return $dsn;
+    return 'dbi:SQLite:dbname=' . $self->_database->filename;
 }
 
 =head2 dbh
@@ -136,10 +93,38 @@ has dbh => (
 
 sub _build_dbh {
     my ($self) = @_;
+    return DBI->connect( 'dbi:SQLite:dbname=' . $self->_database->filename );
+}
 
-    my $dbh = DBI->connect( $self->dsn, '', '' );
+has _database => (
+    is => 'lazy',
+);
 
-    return $dbh;
+sub _build__database {
+    my ($self) = @_;
+
+    my $filename = File::Temp->new( unlink => 1, suffix => 'db' );
+
+    if ( $self->has_database ) {
+        copy( $self->database, $filename )
+            or die 'Copy of ' . $self->database . "failed: $!";
+    }
+    elsif ( $self->has_schema ) {
+        open my $schema, '<', $self->schema
+            or die "Can't read " . $self->schema . ": $!";
+
+        my $dbh = DBI->connect( 'dbi:SQLite:dbname=' . $filename )
+            or die "Failed to open DB $filename";
+
+        while ( my $line = readline($schema) ) {
+            $dbh->do($line)
+                or die 'SQLite Error(' . $self->schema . '): ' . $dbh->errstr;
+        }
+
+        $dbh->disconnect;
+    }
+
+    return $filename;
 }
 
 =head1 METHODS
@@ -159,8 +144,8 @@ Insure that we are given either a B<database> or a B<schema>.
 sub BUILD {
     my ( $self, $args ) = @_;
 
-    die 'Either a database or a schema are required.'
-        unless $self->database or $self->schema;
+    die 'Schema and database may not be used at the same time.'
+        if $self->database and $self->schema;
 }
 
 1;
