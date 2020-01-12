@@ -8,14 +8,16 @@ use Test::Exception;
 
 use_ok 'Test::SQLite';
 
-throws_ok { Test::SQLite->new }
-    qr/database or a schema are required/, 'database or schema required';
+throws_ok {
+    Test::SQLite->new( schema => 't/test.sql', database => 't/test.db' )
+} qr/Schema and database may not be used at the same time/,
+'schema and database declared together';
 
 my $sqlite = Test::SQLite->new( schema => 't/test.sql' );
-ok -e $sqlite->testdb, 'create testdb from schema';
+ok -e $sqlite->_database, 'create test database from schema';
 
 $sqlite = Test::SQLite->new( database => 't/test.db' );
-ok -e $sqlite->testdb, 'create testdb from database';
+ok -e $sqlite->_database, 'create test database from database';
 
 my $dbh = DBI->connect( $sqlite->dsn, '', '' );
 isa_ok $dbh, 'DBI::db';
