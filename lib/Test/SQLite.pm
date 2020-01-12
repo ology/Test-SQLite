@@ -147,7 +147,7 @@ sub _build__database {
 
 =head2 new
 
-  $x = Test::SQLite->new(%arguments);
+  $sqlite = Test::SQLite->new(%arguments);
 
 Create a new C<Test::SQLite> object.
 
