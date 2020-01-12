@@ -156,7 +156,7 @@ Ensure that we are given either a B<database> or a B<schema>.
 sub BUILD {
     my ( $self, $args ) = @_;
     die 'Schema and database may not be used at the same time.'
-        if $self->database and $self->schema;
+        if $self->has_database and $self->has_schema;
 }
 
 1;
