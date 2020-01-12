@@ -113,7 +113,7 @@ sub _build__database {
         open my $schema, '<', $self->schema
             or die "Can't read " . $self->schema . ": $!";
 
-        my $dbh = DBI->connect( 'dbi:SQLite:dbname=' . $filename )
+        my $dbh = DBI->connect( 'dbi:SQLite:dbname=' . $filename, '', '' )
             or die "Failed to open DB $filename";
 
         my $sql = '';
