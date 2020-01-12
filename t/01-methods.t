@@ -4,14 +4,18 @@ use warnings;
 
 use DBI;
 use Test::More;
+use Test::Exception;
 
 use_ok 'Test::SQLite';
 
+throws_ok { Test::SQLite->new }
+    qr/database or a schema are required/, 'database or schema required';
+
 my $sqlite = Test::SQLite->new( schema => 't/test.sql' );
-ok -e $sqlite->testdb, 'create testdb';
+ok -e $sqlite->testdb, 'create testdb from schema';
 
 $sqlite = Test::SQLite->new( database => 't/test.db' );
-ok -e $sqlite->testdb, 'create testdb';
+ok -e $sqlite->testdb, 'create testdb from database';
 
 my $dbh = DBI->connect( $sqlite->dsn, '', '' );
 my $sql = 'SELECT name FROM account';
