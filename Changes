@@ -1,6 +1,8 @@
 Revision history for Test-SQLite
 
 {{$NEXT}}
+
+0.0102 2020-01-12 14:30:09
     - Remove redundant NAME section.
 
 0.0101 2020-01-12 14:11:57
