@@ -103,7 +103,7 @@ has _database => (
 sub _build__database {
     my ($self) = @_;
 
-    my $filename = File::Temp->new( unlink => 1, suffix => 'db' );
+    my $filename = File::Temp->new( unlink => 1, suffix => '.db' );
 
     if ( $self->has_database ) {
         copy( $self->database, $filename )
