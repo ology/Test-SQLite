@@ -46,6 +46,10 @@ B<DBH> handle or B<DSN> connection string.
 
 The database to copy.
 
+=head2 has_database
+
+Boolean indicating that a database file was provided to the constructor.
+
 =cut
 
 has database => (
@@ -57,6 +61,10 @@ has database => (
 =head2 schema
 
 The SQL schema to create a test database.
+
+=head2 has_schema
+
+Boolean indicating that a schema file was provided to the constructor.
 
 =cut
 
