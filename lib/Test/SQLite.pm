@@ -36,7 +36,7 @@ Test::SQLite - SQLite setup/teardown for tests
 =head1 DESCRIPTION
 
 C<Test::SQLite> is loosely inspired by L<Test::PostgreSQL> and
-L<Test::mysqld>, but is limited to setup/teardown of the B<testdb>
+L<Test::mysqld>, but is limited to setup/teardown of the test db
 given a B<database> or B<schema> SQL, and returning the database
 B<DBH> handle or B<DSN> connection string.
 
