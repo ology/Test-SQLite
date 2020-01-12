@@ -166,6 +166,8 @@ Kaitlyn Parkhurst <symkat@symkat.com>
 
 =head1 SEE ALSO
 
+L<DBI>
+
 L<File::Basename>
 
 L<File::Copy>
