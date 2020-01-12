@@ -10,7 +10,7 @@ use_ok 'Test::SQLite';
 
 throws_ok {
     Test::SQLite->new( schema => 'eg/test.sql', database => 'eg/test.db' )
-} qr/Schema and database may not be used at the same time/,
+} qr/may not be used at the same time/,
 'schema and database declared together';
 
 my $sqlite = Test::SQLite->new( schema => 'eg/test.sql' );
