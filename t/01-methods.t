@@ -16,13 +16,14 @@ throws_ok {
 my $sqlite = Test::SQLite->new( schema => 'eg/test.sql' );
 ok -e $sqlite->_database, 'create test database from schema';
 
+my $sql = 'SELECT name FROM account';
+my $expected = [ [ 'Gene' ] ];
+
 my $dbh = DBI->connect( $sqlite->dsn, '', '' );
 isa_ok $dbh, 'DBI::db';
-my $sql = 'SELECT name FROM account';
 my $sth = $dbh->prepare($sql);
 $sth->execute;
 my $got = $sth->fetchall_arrayref;
-my $expected = [ [ 'Gene' ] ];
 is_deeply $got, $expected, 'expected data';
 $dbh->disconnect;
 
