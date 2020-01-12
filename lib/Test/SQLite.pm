@@ -137,7 +137,7 @@ Create a new C<Test::SQLite> object.
 
 =head2 BUILD
 
-Insure that we are given either a B<database> or a B<schema>.
+Ensure that we are given either a B<database> or a B<schema>.
 
 =cut
 
