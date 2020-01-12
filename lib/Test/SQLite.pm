@@ -114,7 +114,7 @@ sub _build__database {
             or die "Can't read " . $self->schema . ": $!";
 
         my $dbh = DBI->connect( 'dbi:SQLite:dbname=' . $filename, '', '' )
-            or die "Failed to open DB $filename";
+            or die "Failed to open DB $filename: " . $DBI::errstr;
 
         my $sql = '';
         while ( my $line = readline($schema) ) {
