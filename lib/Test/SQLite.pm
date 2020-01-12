@@ -119,14 +119,13 @@ sub _build__database {
         my $sql = '';
         while ( my $line = readline($schema) ) {
             next if $line =~ /^\s*--/;
+
+            $sql .= $line;
+
             if ( $line =~ /;/ ) {
-                $sql .= $line;
                 $dbh->do($sql)
                     or die 'Error executing SQL for ' . $self->schema . ': ' . $dbh->errstr;
                 $sql = '';
-            }
-            else {
-                $sql .= $line;
             }
         }
 
