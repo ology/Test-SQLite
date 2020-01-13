@@ -16,14 +16,14 @@ use File::Temp ();
   use DBI;
   use Test::SQLite;
 
-  my $sqlite = Test::SQLite->new(
-    database => '/some/where/production.db',
-    db_attrs => { RaiseError => 1, AutoCommit => 0 },
-  );
+  my $sqlite = Test::SQLite->new(database => '/some/where/production.db');
 
   my $dbh = $sqlite->dbh;
 
-  $sqlite = Test::SQLite->new(schema => '/some/where/schema.sql');
+  $sqlite = Test::SQLite->new(
+    schema   => '/some/where/schema.sql',
+    db_attrs => { RaiseError => 1, AutoCommit => 0 },
+  );
 
   $dbh = DBI->connect($sqlite->dsn, '', '', $sqlite->db_attrs);
 
