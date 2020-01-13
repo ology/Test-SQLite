@@ -1,6 +1,8 @@
 Revision history for Test-SQLite
 
 {{$NEXT}}
+
+0.0200 2020-01-13 01:44:20
     - Remove unused code.
     - Add user specification of the DBI connection attributes.
 
