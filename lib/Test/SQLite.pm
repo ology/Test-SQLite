@@ -16,9 +16,12 @@ use File::Temp ();
   use DBI;
   use Test::SQLite;
 
-  my $sqlite = Test::SQLite->new(database => '/some/where/production.db');
+  my $sqlite = Test::SQLite->new(
+    database => '/some/where/production.db',
+    db_attrs => { RaiseError => 1, AutoCommit => 0 },
+  );
 
-  my $dbh = DBI->connect($sqlite->dsn, '', '');
+  my $dbh = DBI->connect($sqlite->dsn, '', '', $sqlite->db_attrs);
 
   $sqlite = Test::SQLite->new(schema => '/some/where/schema.sql');
 
@@ -66,6 +69,17 @@ has schema => (
     predicate => 'has_schema',
 );
 
+=head2 db_attrs
+
+DBI connection attributes.  Default: { RaiseError => 1, AutoCommit => 1 }
+
+=cut
+
+has db_attrs => (
+    is      => 'ro',
+    default => sub { return { RaiseError => 1, AutoCommit => 1 } },
+);
+
 =head2 dsn
 
 The database connection string.
@@ -95,7 +109,7 @@ has dbh => (
 
 sub _build_dbh {
     my ($self) = @_;
-    return DBI->connect( $self->dsn, '', '' );
+    return DBI->connect( $self->dsn, '', '', $self->db_attrs );
 }
 
 has _database => (
@@ -116,7 +130,7 @@ sub _build__database {
         open my $schema, '<', $self->schema
             or die "Can't read " . $self->schema . ": $!";
 
-        my $dbh = DBI->connect( 'dbi:SQLite:dbname=' . $filename, '', '' )
+        my $dbh = DBI->connect( 'dbi:SQLite:dbname=' . $filename, '', '', { RaiseError => 1, AutoCommit => 0 } )
             or die "Failed to open DB $filename: " . $DBI::errstr;
 
         my $sql = '';
@@ -132,6 +146,8 @@ sub _build__database {
                 $sql = '';
             }
         }
+
+        $dbh->commit;
 
         $dbh->disconnect;
     }
