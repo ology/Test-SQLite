@@ -139,7 +139,7 @@ sub _build__database {
 
             $sql .= $line;
 
-            if ( $line =~ /;/ ) {
+            if ( $line =~ /;\s*$/ ) {
                 $dbh->do($sql)
                     or die 'Error executing SQL for ' . $self->schema . ': ' . $dbh->errstr;
 
