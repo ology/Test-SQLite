@@ -2,6 +2,7 @@ Revision history for Test-SQLite
 
 {{$NEXT}}
     - Improve documentation again!
+    - Add handy error messages if the schema or database files don't exist.
 
 0.0104 2020-01-12 19:09:30
     - Improve documentation.
