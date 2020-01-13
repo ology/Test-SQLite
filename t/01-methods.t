@@ -40,10 +40,12 @@ isnt $sqlite->dsn, 'foo', 'dsn constructor ignored';
 isnt $sqlite->dbh, 'foo', 'dbh constructor ignored';
 isnt $sqlite->_database, 'foo', '_database constructor ignored';
 
+is_deeply $sqlite->db_attrs, { RaiseError => 1, AutoCommit => 1 }, 'db_attrs';
+
 my $sql = 'SELECT name FROM account';
 my $expected = [ [ 'Gene' ] ];
 
-my $dbh = DBI->connect( $sqlite->dsn, '', '' );
+my $dbh = DBI->connect( $sqlite->dsn, '', '', $sqlite->db_attrs );
 isa_ok $dbh, 'DBI::db';
 my $sth = $dbh->prepare($sql);
 $sth->execute;
