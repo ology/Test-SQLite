@@ -98,7 +98,7 @@ sub _build_dsn {
 
 =head2 dbh
 
-A connected database handle.
+A connected database handle based on the B<dsn> and B<db_attrs>.
 
 =cut
 
