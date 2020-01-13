@@ -50,7 +50,7 @@ Boolean indicating that a database file was provided to the constructor.
 
 has database => (
     is        => 'ro',
-    isa       => sub { -e $_[0] },
+    isa       => sub { die 'database does not exist' unless -e $_[0] },
     predicate => 'has_database',
 );
 
@@ -66,7 +66,7 @@ Boolean indicating that a schema file was provided to the constructor.
 
 has schema => (
     is        => 'ro',
-    isa       => sub { -e $_[0] },
+    isa       => sub { die 'schema does not exist' unless -e $_[0] },
     predicate => 'has_schema',
 );
 
