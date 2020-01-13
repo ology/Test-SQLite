@@ -18,6 +18,16 @@ throws_ok {
 } qr/may not be used at the same time/,
 'schema and database declared together';
 
+throws_ok {
+    Test::SQLite->new( schema => 'eg/bogus.sql' )
+} qr/schema does not exist/,
+'schema does not exist';
+
+throws_ok {
+    Test::SQLite->new( database => 'eg/bogus.db' )
+} qr/database does not exist/,
+'database does not exist';
+
 my $sqlite = Test::SQLite->new( schema => 'eg/test.sql' );
 ok -e $sqlite->_database, 'create test database from schema';
 
