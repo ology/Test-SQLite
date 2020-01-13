@@ -2,7 +2,7 @@ package Test::SQLite;
 
 # ABSTRACT: SQLite setup/teardown for tests
 
-our $VERSION = '0.0105';
+our $VERSION = '0.0106';
 
 use Moo;
 use strictures 2;
@@ -16,15 +16,11 @@ use File::Temp qw/ tempfile /;
   use DBI;
   use Test::SQLite;
 
-  my $sqlite = Test::SQLite->new(
-    database => '/some/where/production.db',
-  );
+  my $sqlite = Test::SQLite->new(database => '/some/where/production.db');
 
   my $dbh = DBI->connect($sqlite->dsn, '', '');
 
-  $sqlite = Test::SQLite->new(
-    schema => '/some/where/schema.sql',
-  );
+  $sqlite = Test::SQLite->new(schema => '/some/where/schema.sql');
 
   $dbh = $sqlite->dbh;
 
