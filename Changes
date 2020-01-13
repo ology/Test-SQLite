@@ -1,6 +1,9 @@
 Revision history for Test-SQLite
 
 {{$NEXT}}
+    - Improve documentation again!
+
+0.0104 2020-01-12 19:09:30
     - Improve documentation.
     - Add failure and test for no schema or database given.
 
