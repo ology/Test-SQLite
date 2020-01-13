@@ -2,6 +2,7 @@ Revision history for Test-SQLite
 
 {{$NEXT}}
     - Improve SQL schema line ending regular expression.
+    - Reorganize SYNOPSIS code.
 
 0.0200 2020-01-13 01:44:20
     - Remove unused code.
