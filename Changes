@@ -1,6 +1,9 @@
 Revision history for Test-SQLite
 
 {{$NEXT}}
+    - Remove unused code.
+
+0.0106 2020-01-12 23:53:18
     - Ignore dsn, dbh and _database attributes in the constructor.
 
 0.0105 2020-01-12 19:38:03
