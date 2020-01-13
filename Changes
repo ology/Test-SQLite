@@ -2,6 +2,7 @@ Revision history for Test-SQLite
 
 {{$NEXT}}
     - Remove unused code.
+    - Add user specification of the DBI connection attributes.
 
 0.0106 2020-01-12 23:53:18
     - Ignore dsn, dbh and _database attributes in the constructor.
