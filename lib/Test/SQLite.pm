@@ -9,7 +9,7 @@ use strictures 2;
 
 use DBI;
 use File::Copy;
-use File::Temp qw/ tempfile /;
+use File::Temp ();
 
 =head1 SYNOPSIS
 
