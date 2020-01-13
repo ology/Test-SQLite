@@ -1,6 +1,7 @@
 Revision history for Test-SQLite
 
 {{$NEXT}}
+    - Ignore dsn, dbh and _database attributes in the constructor.
 
 0.0105 2020-01-12 19:38:03
     - Improve documentation again!
