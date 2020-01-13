@@ -136,6 +136,7 @@ sub _build__database {
         my $sql = '';
         while ( my $line = readline($schema) ) {
             next if $line =~ /^\s*--/;
+            next if $line =~ /^\s*$/;
 
             $sql .= $line;
 
