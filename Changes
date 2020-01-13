@@ -1,6 +1,9 @@
 Revision history for Test-SQLite
 
 {{$NEXT}}
+    - Skip blank lines in the schema SQL.
+
+0.0201 2020-01-13 14:06:10
     - Improve SQL schema line ending regular expression.
     - Reorganize SYNOPSIS code.
 
