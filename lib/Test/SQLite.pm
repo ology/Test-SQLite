@@ -77,7 +77,8 @@ The database connection string.
 =cut
 
 has dsn => (
-    is => 'lazy',
+    is       => 'lazy',
+    init_arg => undef,
 );
 
 sub _build_dsn {
@@ -92,7 +93,8 @@ A connected database handle.
 =cut
 
 has dbh => (
-    is => 'lazy',
+    is       => 'lazy',
+    init_arg => undef,
 );
 
 sub _build_dbh {
@@ -101,7 +103,8 @@ sub _build_dbh {
 }
 
 has _database => (
-    is => 'lazy',
+    is       => 'lazy',
+    init_arg => undef,
 );
 
 sub _build__database {
