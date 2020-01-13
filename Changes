@@ -1,6 +1,8 @@
 Revision history for Test-SQLite
 
 {{$NEXT}}
+
+0.0105 2020-01-12 19:38:03
     - Improve documentation again!
     - Add handy error messages if the schema or database files don't exist.
     - Add DBD::SQLite to the prereqs to satisfy cpantesters.
