@@ -28,8 +28,17 @@ throws_ok {
 } qr/database does not exist/,
 'database does not exist';
 
-my $sqlite = Test::SQLite->new( schema => 'eg/test.sql' );
+my $sqlite = Test::SQLite->new(
+    schema    => 'eg/test.sql',
+    dsn       => 'foo',
+    dbh       => 'foo',
+    _database => 'foo',
+);
 ok -e $sqlite->_database, 'create test database from schema';
+
+isnt $sqlite->dsn, 'foo', 'dsn constructor ignored';
+isnt $sqlite->dbh, 'foo', 'dbh constructor ignored';
+isnt $sqlite->_database, 'foo', '_database constructor ignored';
 
 my $sql = 'SELECT name FROM account';
 my $expected = [ [ 'Gene' ] ];
