@@ -21,11 +21,11 @@ use File::Temp ();
     db_attrs => { RaiseError => 1, AutoCommit => 0 },
   );
 
-  my $dbh = DBI->connect($sqlite->dsn, '', '', $sqlite->db_attrs);
+  $dbh = $sqlite->dbh;
 
   $sqlite = Test::SQLite->new(schema => '/some/where/schema.sql');
 
-  $dbh = $sqlite->dbh;
+  my $dbh = DBI->connect($sqlite->dsn, '', '', $sqlite->db_attrs);
 
 =head1 DESCRIPTION
 
