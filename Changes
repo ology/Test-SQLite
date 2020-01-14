@@ -1,6 +1,7 @@
 Revision history for Test-SQLite
 
 {{$NEXT}}
+    - Test that the temporary db is unlinked when out of scope.
 
 0.0202 2020-01-13 15:20:18
     - Skip blank lines in the schema SQL.
