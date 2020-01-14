@@ -1,6 +1,9 @@
 Revision history for Test-SQLite
 
 {{$NEXT}}
+    - Improve documentation again!
+
+0.0206 2020-01-13 21:40:36
     - Clean up code slightly.
     - Improve documentation.
 
