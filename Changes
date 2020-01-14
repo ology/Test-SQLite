@@ -1,6 +1,8 @@
 Revision history for Test-SQLite
 
 {{$NEXT}}
+    - Explicitly set the File::Temp EXLOCK to false and require a minimum version.
+    [SREZIC RT #131472]
 
 0.0207 2020-01-14 08:43:58
     - Improve documentation again!
