@@ -1,6 +1,8 @@
 Revision history for Test-SQLite
 
 {{$NEXT}}
+
+0.0202 2020-01-13 15:20:18
     - Skip blank lines in the schema SQL.
     - Test and use the db_attrs attribute.
 
