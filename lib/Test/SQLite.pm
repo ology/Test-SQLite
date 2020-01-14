@@ -57,11 +57,11 @@ has database => (
 
 The SQL schema to create a test database.
 
+* The SQL parsing done by this module does not handle triggers.
+
 =head2 has_schema
 
 Boolean indicating that a schema file was provided to the constructor.
-
-* The SQL parsing done by this module does not handle triggers.
 
 =cut
 
