@@ -11,31 +11,37 @@ use constant EXPECTED => [ [ 'Gene' ] ];
 
 use_ok 'Test::SQLite';
 
-throws_ok {
-    Test::SQLite->new
-} qr/No schema or database given/,
-'schema or database required';
+subtest 'construction failures' => sub {
+    throws_ok {
+        Test::SQLite->new
+    } qr/No schema or database given/,
+    'schema or database required';
 
-throws_ok {
-    Test::SQLite->new( schema => 'eg/test.sql', database => 'eg/test.db' )
-} qr/may not be used at the same time/,
-'schema and database declared together';
+    throws_ok {
+        Test::SQLite->new( schema => 'eg/test.sql', database => 'eg/test.db' )
+    } qr/may not be used at the same time/,
+    'schema and database declared together';
 
-throws_ok {
-    Test::SQLite->new( schema => 'eg/bogus.sql' )
-} qr/schema does not exist/,
-'schema does not exist';
+    throws_ok {
+        Test::SQLite->new( schema => 'eg/bogus.sql' )
+    } qr/schema does not exist/,
+    'schema does not exist';
 
-throws_ok {
-    Test::SQLite->new( database => 'eg/bogus.db' )
-} qr/database does not exist/,
-'database does not exist';
+    throws_ok {
+        Test::SQLite->new( database => 'eg/bogus.db' )
+    } qr/database does not exist/,
+    'database does not exist';
+};
 
-my $got = from_sql();
-ok !-e $got, 'db removed';
+subtest 'from schema' => sub {
+    my $got = from_sql();
+    ok !-e $got, 'db removed';
+};
 
-$got = from_db();
-ok !-e $got, 'db removed';
+subtest 'from database' => sub {
+    my $got = from_db();
+    ok !-e $got, 'db removed';
+};
 
 done_testing();
 
