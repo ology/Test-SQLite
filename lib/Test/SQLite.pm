@@ -162,7 +162,8 @@ sub _build__database {
 
   $sqlite = Test::SQLite->new(%arguments);
 
-Create a new C<Test::SQLite> object.
+Create a new C<Test::SQLite> object, which creates a temporary
+database based on the given B<database> or B<schema>.
 
 =head2 BUILD
 
