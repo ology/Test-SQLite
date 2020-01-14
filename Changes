@@ -1,6 +1,7 @@
 Revision history for Test-SQLite
 
 {{$NEXT}}
+    - Clean up code slightly.
     - Add trigger caveat to the schema description.
 
 0.0205 2020-01-13 21:07:12
