@@ -55,7 +55,7 @@ has database => (
 
 =head2 schema
 
-The SQL schema to create a test database.
+The SQL schema with which to create a test database.
 
 * The SQL parsing done by this module does not handle triggers.
 
