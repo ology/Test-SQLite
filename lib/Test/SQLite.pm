@@ -182,11 +182,9 @@ sub BUILD {
 1;
 __END__
 
-=head1 THANK YOU
-
-Kaitlyn Parkhurst <symkat@symkat.com>
-
 =head1 SEE ALSO
+
+The F<t/001-methods.t> file in this distribution.
 
 L<DBI>
 
@@ -195,5 +193,9 @@ L<File::Copy>
 L<File::Temp>
 
 L<Moo>
+
+=head1 THANK YOU
+
+Kaitlyn Parkhurst <symkat@symkat.com>
 
 =cut
