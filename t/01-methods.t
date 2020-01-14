@@ -6,6 +6,9 @@ use DBI;
 use Test::More;
 use Test::Exception;
 
+use constant SQL => 'SELECT name FROM account';
+use constant EXPECTED => [ [ 'Gene' ] ];
+
 use_ok 'Test::SQLite';
 
 throws_ok {
@@ -51,15 +54,12 @@ sub from_sql {
 
     is_deeply $sqlite->db_attrs, { RaiseError => 1, AutoCommit => 1 }, 'db_attrs';
 
-    my $sql = 'SELECT name FROM account';
-    my $expected = [ [ 'Gene' ] ];
-
     my $dbh = DBI->connect( $sqlite->dsn, '', '', $sqlite->db_attrs );
     isa_ok $dbh, 'DBI::db';
-    my $sth = $dbh->prepare($sql);
+    my $sth = $dbh->prepare(SQL);
     $sth->execute;
     my $got = $sth->fetchall_arrayref;
-    is_deeply $got, $expected, 'expected data';
+    is_deeply $got, EXPECTED, 'expected data';
     $dbh->disconnect;
 
     return $sqlite->_database->filename;
@@ -69,15 +69,12 @@ sub from_db {
     my $sqlite = Test::SQLite->new( database => 'eg/test.db' );
     ok -e $sqlite->_database, 'create test database from database';
 
-    my $sql = 'SELECT name FROM account';
-    my $expected = [ [ 'Gene' ] ];
-
     my $dbh = $sqlite->dbh;
     isa_ok $dbh, 'DBI::db';
-    my $sth = $dbh->prepare($sql);
+    my $sth = $dbh->prepare(SQL);
     $sth->execute;
     my $got = $sth->fetchall_arrayref;
-    is_deeply $got, $expected, 'expected data';
+    is_deeply $got, EXPECTED, 'expected data';
 
     return $sqlite->_database->filename;
 }
