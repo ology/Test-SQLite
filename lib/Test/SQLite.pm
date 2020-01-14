@@ -2,7 +2,7 @@ package Test::SQLite;
 
 # ABSTRACT: SQLite setup/teardown for tests
 
-our $VERSION = '0.0202';
+our $VERSION = '0.0203';
 
 use Moo;
 use strictures 2;
