@@ -130,7 +130,7 @@ sub _build__database {
         open my $schema, '<', $self->schema
             or die "Can't read " . $self->schema . ": $!";
 
-        my $dbh = DBI->connect( 'dbi:SQLite:dbname=' . $filename, '', '', { RaiseError => 1, AutoCommit => 0 } )
+        my $dbh = DBI->connect( "dbi:SQLite:dbname=$filename", '', '', { RaiseError => 1, AutoCommit => 0 } )
             or die "Failed to open DB $filename: " . $DBI::errstr;
 
         my $sql = '';
