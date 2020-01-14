@@ -1,6 +1,9 @@
 Revision history for Test-SQLite
 
 {{$NEXT}}
+    - Improve documentation.
+
+0.0204 2020-01-13 20:49:41
     - Use constants in the test instead of repeated variables.
     - Collect tests into subtest sections.
     - Improve documentation.
