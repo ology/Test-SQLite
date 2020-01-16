@@ -17,15 +17,19 @@ use File::Temp ();
   use Test::SQLite;
 
   my $sqlite = Test::SQLite->new(database => '/some/where/production.db');
-
   my $dbh = $sqlite->dbh;
+  # Fiddle with the test database...
+  $dbh->disconnect;
 
   $sqlite = Test::SQLite->new(
     schema   => '/some/where/schema.sql',
     db_attrs => { RaiseError => 1, AutoCommit => 0 },
   );
-
+  # Explicitly use the dsn and db_attrs to connect:
   $dbh = DBI->connect($sqlite->dsn, '', '', $sqlite->db_attrs);
+  # Fiddle with the test database...
+  $dbh->commit;
+  $dbh->disconnect;
 
 =head1 DESCRIPTION
 
