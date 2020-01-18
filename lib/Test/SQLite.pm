@@ -36,8 +36,10 @@ use File::Temp ();
 C<Test::SQLite> is loosely inspired by L<Test::PostgreSQL> and
 L<Test::mysqld>, and creates a temporary db to use in tests.  Unlike
 those modules, it is limited to setup/teardown of the test db given a
-B<database> or B<schema> SQL file.  Also this module will return the
-database B<dbh> handle and B<dsn> connection string.
+B<database> or B<schema> SQL file.
+
+Also this module will return the database B<dbh> handle, B<dsn>
+connection string, and B<db_attrs> connection attributes.
 
 =head1 ATTRIBUTES
 
