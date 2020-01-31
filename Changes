@@ -2,6 +2,7 @@ Revision history for Test-SQLite
 
 {{$NEXT}}
     - Improve documentation a bit more.
+    - Add the eg/dbic.pl script.
 
 0.0209 2020-01-16 09:28:23
     - Improve documentation slightly.
