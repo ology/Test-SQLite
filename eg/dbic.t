@@ -23,7 +23,7 @@ my $user = $schema->resultset('Account')->create({
 });
 isa_ok $user, 'MyApp::Schema::Result::Account';
 
-my $result = $schema->resultset('Account')->search_by_name($name); # Custom ResultSet method
+my $result = $schema->resultset('Account')->search({ name => $name })->first;
 isa_ok $result, 'MyApp::Schema::Result::Account';
 is $result->name, $user->name, 'name';
 is $result->id, $user->id, 'id';
