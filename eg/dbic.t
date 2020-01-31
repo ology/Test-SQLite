@@ -5,7 +5,7 @@ use warnings;
 use Test::More;
 use Test::SQLite;
 
-use MyApp::Schema;  # Existing database model
+use MyApp::Schema;  # Existing DBIC database model
 
 my $sqlite = Test::SQLite->new(schema => '/some/empty.sql');
 isa_ok $sqlite, 'Test::SQLite';
