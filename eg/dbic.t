@@ -15,16 +15,15 @@ isa_ok $schema, 'MyApp::Schema';
 
 $schema->deploy;
 
-my $name  = 'test-' . time();
-my $class = 'Account';
+my $name = 'test-' . time();
 
-my $user = $schema->resultset($class)->create({
+my $user = $schema->resultset('Account')->create({
     name     => $name,
     password => 'test',
 });
 isa_ok $user, 'MyApp::Schema::Result::Account';
 
-my $result = $schema->resultset($class)->search_by_name($name); # Custom ResultSet method
+my $result = $schema->resultset('Account')->search_by_name($name); # Custom ResultSet method
 isa_ok $result, 'MyApp::Schema::Result::Account';
 is $result->name, $user->name, 'name';
 is $result->id, $user->id, 'id';
