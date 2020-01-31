@@ -10,7 +10,7 @@ use MyApp::Schema;  # Existing database model
 my $sqlite = Test::SQLite->new(schema => '/some/empty.sql');
 isa_ok $sqlite, 'Test::SQLite';
 
-my $schema = MyApp::Schema->connect( $sqlite->dsn );
+my $schema = MyApp::Schema->connect( $sqlite->dsn, '', '', $sqlite->db_attrs );
 isa_ok $schema, 'MyApp::Schema';
 
 $schema->deploy;
