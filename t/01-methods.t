@@ -16,8 +16,18 @@ use_ok 'Test::SQLite';
 subtest 'construction failures' => sub {
     throws_ok {
         Test::SQLite->new( schema => 'eg/test.sql', database => 'eg/test.db' )
-    } qr/may not be used at the same time/,
+    } qr/may not be used together/,
     'schema and database declared together';
+
+    throws_ok {
+        Test::SQLite->new( database => 'eg/test.db', memory => 1 )
+    } qr/may not be used together/,
+    'database and memory declared together';
+
+    throws_ok {
+        Test::SQLite->new( schema => 'eg/test.sql', memory => 1 )
+    } qr/may not be used together/,
+    'schema and memory declared together';
 
     throws_ok {
         Test::SQLite->new( schema => 'eg/bogus.sql' )
@@ -33,6 +43,10 @@ subtest 'construction failures' => sub {
 subtest 'no arguments' => sub {
     my $got = no_args();
     ok !-e $got, 'db removed';
+};
+
+subtest 'in memory' => sub {
+    in_mem();
 };
 
 subtest 'from schema' => sub {
@@ -65,6 +79,23 @@ sub no_args {
     is_deeply $got, EXPECTED, 'expected data';
 
     return $sqlite->_database->filename;
+}
+
+sub in_mem {
+    my $sqlite = Test::SQLite->new(memory => 1);
+
+    my $dbh = $sqlite->dbh;
+    isa_ok $dbh, 'DBI::db';
+
+    my $sth = $dbh->prepare(CREATE);
+    $sth->execute;
+    $sth = $dbh->prepare(INSERT);
+    $sth->execute;
+
+    $sth = $dbh->prepare(SELECT);
+    $sth->execute;
+    my $got = $sth->fetchall_arrayref;
+    is_deeply $got, EXPECTED, 'expected data';
 }
 
 sub from_sql {

@@ -2,7 +2,7 @@ package Test::SQLite;
 
 # ABSTRACT: SQLite setup/teardown for tests
 
-our $VERSION = '0.0300';
+our $VERSION = '0.0400';
 
 use Moo;
 use strictures 2;
@@ -19,6 +19,12 @@ use File::Temp ();
   # Start with an empty test db:
   my $sqlite = Test::SQLite->new;
   my $dbh = $sqlite->dbh;
+  # Fiddle with the test database...
+  $dbh->disconnect;
+
+  # Use an in-memory database:
+  $sqlite = Test::SQLite->new(memory => 1);
+  $dbh = $sqlite->dbh;
   # Fiddle with the test database...
   $dbh->disconnect;
 
@@ -55,7 +61,8 @@ The database to copy.
 
 =head2 has_database
 
-Boolean indicating that a database file was provided to the constructor.
+Boolean indicating that a B<database> file was provided to the
+constructor.
 
 =cut
 
@@ -73,7 +80,8 @@ The SQL schema with which to create a test database.
 
 =head2 has_schema
 
-Boolean indicating that a schema file was provided to the constructor.
+Boolean indicating that a B<schema> file was provided to the
+constructor.
 
 =cut
 
@@ -81,6 +89,21 @@ has schema => (
     is        => 'ro',
     isa       => sub { die 'schema does not exist' unless -e $_[0] },
     predicate => 'has_schema',
+);
+
+=head2 memory
+
+Create a test database in memory.
+
+=head2 has_memory
+
+Boolean indicating that B<memory> was provided to the constructor.
+
+=cut
+
+has memory => (
+    is        => 'ro',
+    predicate => 'has_memory',
 );
 
 =head2 db_attrs
@@ -107,7 +130,7 @@ has dsn => (
 
 sub _build_dsn {
     my ($self) = @_;
-    return 'dbi:SQLite:dbname=' . $self->_database->filename;
+    return 'dbi:SQLite:dbname=' . ( $self->has_memory ? $self->_database : $self->_database->filename );
 }
 
 =head2 dbh
@@ -134,7 +157,9 @@ has _database => (
 sub _build__database {
     my ($self) = @_;
 
-    my $filename = File::Temp->new( unlink => 1, suffix => '.db', EXLOCK => 0 );
+    my $filename = $self->has_memory
+        ? ':memory:'
+        : File::Temp->new( unlink => 1, suffix => '.db', EXLOCK => 0 );
 
     if ( $self->has_database ) {
         copy( $self->database, $filename )
@@ -181,14 +206,17 @@ Create a new C<Test::SQLite> object.
 
 =head2 BUILD
 
-Ensure that we are not given both a B<database> and B<schema>.
+Ensure that we are only given one of B<database>, B<schema> or
+B<memory> in the constructor.
 
 =cut
 
 sub BUILD {
     my ( $self, $args ) = @_;
-    die 'Schema and database may not be used at the same time.'
-        if $self->has_database and $self->has_schema;
+    die 'The schema, database and memory arguments may not be used together.'
+        if ( $self->has_database and $self->has_schema )
+            or ( $self->has_database and $self->has_memory )
+            or ( $self->has_schema and $self->has_memory );
 }
 
 1;
