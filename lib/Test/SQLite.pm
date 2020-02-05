@@ -23,8 +23,8 @@ use File::Temp ();
   $dbh->disconnect;
 
   # Copy a database file to the test db:
-  my $sqlite = Test::SQLite->new(database => '/some/where/production.db');
-  my $dbh = $sqlite->dbh;
+  $sqlite = Test::SQLite->new(database => '/some/where/production.db');
+  $dbh = $sqlite->dbh;
   # Fiddle with the test database...
   $dbh->disconnect;
 
