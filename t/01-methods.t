@@ -8,7 +8,7 @@ use Test::Exception;
 
 use constant CREATE   => "CREATE TABLE account ( id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT NOT NULL UNIQUE, password TEXT NOT NULL, active INTEGER NOT NULL, created DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP )";
 use constant INSERT   => "INSERT INTO account (name, password, active) VALUES ('Gene', 'abc123', 1)";
-use constant SQL      => 'SELECT name FROM account';
+use constant SELECT   => 'SELECT name FROM account';
 use constant EXPECTED => [ ['Gene'] ];
 
 use_ok 'Test::SQLite';
@@ -59,7 +59,7 @@ sub no_args {
     $sth = $dbh->prepare(INSERT);
     $sth->execute;
 
-    $sth = $dbh->prepare(SQL);
+    $sth = $dbh->prepare(SELECT);
     $sth->execute;
     my $got = $sth->fetchall_arrayref;
     is_deeply $got, EXPECTED, 'expected data';
@@ -84,7 +84,7 @@ sub from_sql {
 
     my $dbh = DBI->connect( $sqlite->dsn, '', '', $sqlite->db_attrs );
     isa_ok $dbh, 'DBI::db';
-    my $sth = $dbh->prepare(SQL);
+    my $sth = $dbh->prepare(SELECT);
     $sth->execute;
     my $got = $sth->fetchall_arrayref;
     is_deeply $got, EXPECTED, 'expected data';
@@ -99,7 +99,7 @@ sub from_db {
 
     my $dbh = $sqlite->dbh;
     isa_ok $dbh, 'DBI::db';
-    my $sth = $dbh->prepare(SQL);
+    my $sth = $dbh->prepare(SELECT);
     $sth->execute;
     my $got = $sth->fetchall_arrayref;
     is_deeply $got, EXPECTED, 'expected data';
