@@ -202,6 +202,8 @@ Use in memory storage.
 
 The F<t/01-methods.t> file in this distribution.
 
+The F<eg/dbic.t> example test in this distribution.
+
 L<DBI>
 
 L<File::Copy>
