@@ -2,7 +2,7 @@ package Test::SQLite;
 
 # ABSTRACT: SQLite setup/teardown for tests
 
-our $VERSION = '0.0210';
+our $VERSION = '0.0300';
 
 use Moo;
 use strictures 2;
@@ -16,11 +16,19 @@ use File::Temp ();
   use DBI;
   use Test::SQLite;
 
+  # Start with an empty test db:
+  my $sqlite = Test::SQLite->new;
+  my $dbh = $sqlite->dbh;
+  # Fiddle with the test database...
+  $dbh->disconnect;
+
+  # Copy a database file to the test db:
   my $sqlite = Test::SQLite->new(database => '/some/where/production.db');
   my $dbh = $sqlite->dbh;
   # Fiddle with the test database...
   $dbh->disconnect;
 
+  # Use a schema file to create the test db:
   $sqlite = Test::SQLite->new(
     schema   => '/some/where/schema.sql',
     db_attrs => { RaiseError => 1, AutoCommit => 0 },
@@ -35,10 +43,9 @@ use File::Temp ();
 
 C<Test::SQLite> is loosely inspired by L<Test::PostgreSQL> and
 L<Test::mysqld>, and creates a temporary db to use in tests.  Unlike
-those modules, it is limited to setup/teardown of the test db given a
-B<database> or B<schema> SQL file.
+those modules, it is limited to setup/teardown of the test db.
 
-Also this module will return the database B<dbh> handle, B<dsn>
+This module will also return the database B<dbh> handle, B<dsn>
 connection string, and B<db_attrs> connection attributes.
 
 =head1 ATTRIBUTES
@@ -168,15 +175,14 @@ sub _build__database {
 
 =head2 new
 
+  $sqlite = Test::SQLite->new;
   $sqlite = Test::SQLite->new(%arguments);
 
-Create a new C<Test::SQLite> object, which creates a temporary
-database given a B<database> or B<schema>.
+Create a new C<Test::SQLite> object.
 
 =head2 BUILD
 
-Ensure that we are given either a B<database> or a B<schema>, and not
-both.
+Ensure that we are not given both a B<database> and B<schema>.
 
 =cut
 
@@ -184,8 +190,6 @@ sub BUILD {
     my ( $self, $args ) = @_;
     die 'Schema and database may not be used at the same time.'
         if $self->has_database and $self->has_schema;
-    die 'No schema or database given.'
-        unless $self->has_database or $self->has_schema;
 }
 
 1;
@@ -193,7 +197,7 @@ __END__
 
 =head1 TO DO
 
-Use in memory storage if not given a database or schema.
+Use in memory storage.
 
 =head1 SEE ALSO
 
@@ -209,6 +213,6 @@ L<Moo>
 
 =head1 THANK YOU
 
-Kaitlyn Parkhurst <symkat@symkat.com>
+Kaitlyn Parkhurst (SYMKAT) <symkat@symkat.com>
 
 =cut

@@ -6,17 +6,14 @@ use DBI;
 use Test::More;
 use Test::Exception;
 
-use constant SQL => 'SELECT name FROM account';
-use constant EXPECTED => [ [ 'Gene' ] ];
+use constant CREATE   => "CREATE TABLE account ( id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT NOT NULL UNIQUE, password TEXT NOT NULL, active INTEGER NOT NULL, created DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP )";
+use constant INSERT   => "INSERT INTO account (name, password, active) VALUES ('Gene', 'abc123', 1)";
+use constant SQL      => 'SELECT name FROM account';
+use constant EXPECTED => [ ['Gene'] ];
 
 use_ok 'Test::SQLite';
 
 subtest 'construction failures' => sub {
-    throws_ok {
-        Test::SQLite->new
-    } qr/No schema or database given/,
-    'schema or database required';
-
     throws_ok {
         Test::SQLite->new( schema => 'eg/test.sql', database => 'eg/test.db' )
     } qr/may not be used at the same time/,
@@ -33,6 +30,11 @@ subtest 'construction failures' => sub {
     'database does not exist';
 };
 
+subtest 'no arguments' => sub {
+    my $got = no_args();
+    ok !-e $got, 'db removed';
+};
+
 subtest 'from schema' => sub {
     my $got = from_sql();
     ok !-e $got, 'db removed';
@@ -44,6 +46,26 @@ subtest 'from database' => sub {
 };
 
 done_testing();
+
+sub no_args {
+    my $sqlite = Test::SQLite->new;
+    ok -e $sqlite->_database, 'create test database';
+
+    my $dbh = $sqlite->dbh;
+    isa_ok $dbh, 'DBI::db';
+
+    my $sth = $dbh->prepare(CREATE);
+    $sth->execute;
+    $sth = $dbh->prepare(INSERT);
+    $sth->execute;
+
+    $sth = $dbh->prepare(SQL);
+    $sth->execute;
+    my $got = $sth->fetchall_arrayref;
+    is_deeply $got, EXPECTED, 'expected data';
+
+    return $sqlite->_database->filename;
+}
 
 sub from_sql {
     my $sqlite = Test::SQLite->new(
