@@ -222,10 +222,6 @@ sub BUILD {
 1;
 __END__
 
-=head1 TO DO
-
-Use in memory storage.
-
 =head1 SEE ALSO
 
 The F<t/01-methods.t> file in this distribution.
