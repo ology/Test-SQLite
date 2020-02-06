@@ -1,6 +1,8 @@
 Revision history for Test-SQLite
 
 {{$NEXT}}
+
+0.0402 2020-02-06 05:57:48
     - Add missing documentation bits.
 
 0.0401 2020-02-06 05:46:10
