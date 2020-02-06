@@ -6,6 +6,7 @@ our $VERSION = '0.0401';
 
 use Moo;
 use strictures 2;
+use namespace::clean;
 
 use DBI;
 use File::Copy;
