@@ -238,8 +238,6 @@ L<File::Temp>
 
 L<Moo>
 
-L<namespace::clean>
-
 =head1 THANK YOU
 
 Kaitlyn Parkhurst (SYMKAT) <symkat@symkat.com>
