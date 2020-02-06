@@ -4,13 +4,13 @@ package Test::SQLite;
 
 our $VERSION = '0.0402';
 
-use Moo;
-use strictures 2;
-use namespace::clean;
-
 use DBI;
 use File::Copy;
 use File::Temp ();
+
+use Moo;
+use strictures 2;
+use namespace::clean;
 
 =head1 SYNOPSIS
 
