@@ -6,7 +6,7 @@ use DBI;
 use Test::More;
 use Test::Exception;
 
-use constant CREATE   => "CREATE TABLE account ( id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT NOT NULL UNIQUE, password TEXT NOT NULL, active INTEGER NOT NULL, created DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP )";
+use constant CREATE   => 'CREATE TABLE account (id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT NOT NULL UNIQUE, password TEXT NOT NULL, active INTEGER NOT NULL, created DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP)';
 use constant INSERT   => "INSERT INTO account (name, password, active) VALUES ('Gene', 'abc123', 1)";
 use constant SELECT   => 'SELECT name FROM account';
 use constant EXPECTED => [ ['Gene'] ];
