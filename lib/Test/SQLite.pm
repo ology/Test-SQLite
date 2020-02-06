@@ -2,7 +2,7 @@ package Test::SQLite;
 
 # ABSTRACT: SQLite setup/teardown for tests
 
-our $VERSION = '0.0401';
+our $VERSION = '0.0402';
 
 use Moo;
 use strictures 2;
@@ -49,7 +49,8 @@ use File::Temp ();
 =head1 DESCRIPTION
 
 C<Test::SQLite> is inspired by L<Test::PostgreSQL> and
-L<Test::mysqld>, and creates a temporary db to use in tests.
+L<Test::mysqld>, and creates a temporary sqlite database to use in
+tests.
 
 This module will also return the database B<dbh> handle, B<dsn>
 connection string, and B<db_attrs> connection attributes.
@@ -236,6 +237,8 @@ L<File::Copy>
 L<File::Temp>
 
 L<Moo>
+
+L<namespace::clean>
 
 =head1 THANK YOU
 

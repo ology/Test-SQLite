@@ -1,6 +1,9 @@
 Revision history for Test-SQLite
 
 {{$NEXT}}
+    - Add missing documentation bits.
+
+0.0401 2020-02-06 05:46:10
     - Improve documentation ever so slightly.
     - Fix eg/dbic.t code a bit.
     - Use namespace::clean.
