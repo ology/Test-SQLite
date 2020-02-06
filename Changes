@@ -1,6 +1,9 @@
 Revision history for Test-SQLite
 
 {{$NEXT}}
+    - Improve documentation ever so slightly.
+
+0.0400 2020-02-05 08:18:14
     - Improve documentation.
     - Allow construction of an in-memory database.
 
