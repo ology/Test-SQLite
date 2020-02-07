@@ -83,6 +83,7 @@ sub no_args {
     $sth->execute;
     my $got = $sth->fetchall_arrayref;
     is_deeply $got, EXPECTED, 'expected data';
+    $dbh->disconnect;
 
     return $sqlite->_database->filename;
 }
@@ -102,6 +103,7 @@ sub in_mem {
     $sth->execute;
     my $got = $sth->fetchall_arrayref;
     is_deeply $got, EXPECTED, 'expected data';
+    $dbh->disconnect;
 }
 
 sub from_sql {
@@ -134,6 +136,7 @@ sub from_db {
     $sth->execute;
     my $got = $sth->fetchall_arrayref;
     is_deeply $got, EXPECTED, 'expected data';
+    $dbh->disconnect;
 
     return $sqlite->_database->filename;
 }
