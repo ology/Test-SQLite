@@ -2,6 +2,7 @@ Revision history for Test-SQLite
 
 {{$NEXT}}
     - Explicitly disconnect the database handle in all the subtests.
+    - Improve documentation.
 
 0.0403 2020-02-06 06:15:13
     - Remove the unnecessary "missing documentation bits."  Oops.
