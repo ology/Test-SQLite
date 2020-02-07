@@ -59,7 +59,7 @@ connection string, and B<db_attrs> connection attributes.
 
 =head2 database
 
-The database to copy.
+The existing database to copy to create a new test database.
 
 =head2 has_database
 
@@ -110,7 +110,9 @@ has memory => (
 
 =head2 db_attrs
 
-DBI connection attributes.  Default: { RaiseError => 1, AutoCommit => 1 }
+DBI connection attributes.
+
+Default: { RaiseError => 1, AutoCommit => 1 }
 
 =cut
 
