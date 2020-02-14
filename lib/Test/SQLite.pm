@@ -166,7 +166,7 @@ sub _build__database {
         : File::Temp->new( unlink => 1, suffix => '.db', EXLOCK => 0 );
 
     if ( $self->has_database ) {
-        copy( $self->database, $tempfile )
+        copy( $self->database, $tempfile->filename )
             or die "Can't copy " . $self->database . ": $!";
     }
     elsif ( $self->has_schema ) {
