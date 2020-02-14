@@ -2,7 +2,7 @@ package Test::SQLite;
 
 # ABSTRACT: SQLite setup/teardown for tests
 
-our $VERSION = '0.0405';
+our $VERSION = '0.0406';
 
 use DBI;
 use File::Copy;
@@ -78,8 +78,7 @@ has database => (
 
 The SQL schema with which to create a test database.
 
-* The SQL parsing done by this module does not handle triggers or
-c-style comments.
+* The SQL parsing done by this module does not handle triggers.
 
 =head2 has_schema
 
