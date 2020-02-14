@@ -78,7 +78,8 @@ has database => (
 
 The SQL schema with which to create a test database.
 
-* The SQL parsing done by this module does not handle triggers.
+* The SQL parsing done by this module does not handle triggers or
+c-style comments.
 
 =head2 has_schema
 
