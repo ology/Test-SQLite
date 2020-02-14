@@ -7,6 +7,6 @@ CREATE TABLE account (
     password TEXT NOT NULL,
     active INTEGER NOT NULL,
     created DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP
-);
+); -- This is a comment.
 
 INSERT INTO account (name, password, active) VALUES ('Gene', 'abc123', 1);
