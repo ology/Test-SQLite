@@ -3,6 +3,7 @@ Revision history for Test-SQLite
 {{$NEXT}}
     - Improve documentation.
     - Improve internal variable name and usage.
+    - Handle an SQL end-of-line comment in schema parsing.
 
 0.0404 2020-02-07 15:05:19
     - Explicitly disconnect the database handle in all the subtests.
