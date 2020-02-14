@@ -1,6 +1,9 @@
 Revision history for Test-SQLite
 
 {{$NEXT}}
+    - Improve internal variable name and usage.
+
+0.0404 2020-02-07 15:05:19
     - Explicitly disconnect the database handle in all the subtests.
     - Improve documentation.
     - Replace the mistakenly moved test cases.
