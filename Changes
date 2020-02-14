@@ -1,6 +1,9 @@
 Revision history for Test-SQLite
 
 {{$NEXT}}
+    - Add various comment styles to the eg/test.sql file.
+
+0.0405 2020-02-14 00:17:28
     - Improve documentation.
     - Improve internal variable name and usage.
     - Handle an SQL end-of-line comment in schema parsing.
