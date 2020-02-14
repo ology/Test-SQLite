@@ -1,6 +1,7 @@
 Revision history for Test-SQLite
 
 {{$NEXT}}
+    - Improve documentation.
     - Improve internal variable name and usage.
 
 0.0404 2020-02-07 15:05:19
