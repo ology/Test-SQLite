@@ -20,7 +20,7 @@ use namespace::clean;
   # An empty test db:
   my $sqlite = Test::SQLite->new;
 
-  # Use an in-memory database:
+  # Use an in-memory test db:
   $sqlite = Test::SQLite->new(memory => 1);
 
   # Copy a database file to the test db:
