@@ -2,7 +2,7 @@ package Test::SQLite;
 
 # ABSTRACT: SQLite setup/teardown for tests
 
-our $VERSION = '0.0406';
+our $VERSION = '0.0407';
 
 use DBI;
 use File::Copy;
