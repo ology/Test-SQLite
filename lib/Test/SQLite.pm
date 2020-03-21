@@ -2,7 +2,7 @@ package Test::SQLite;
 
 # ABSTRACT: SQLite setup/teardown for tests
 
-our $VERSION = '0.0408';
+our $VERSION = '0.0409';
 
 use DBI;
 use File::Copy;
@@ -206,10 +206,7 @@ sub _build__database {
 
 Create a new C<Test::SQLite> object.
 
-=head2 BUILD
-
-Ensure that we are only given one of B<database>, B<schema> or
-B<memory> in the constructor.
+=for Pod::Coverage BUILD
 
 =cut
 
