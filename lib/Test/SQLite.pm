@@ -33,7 +33,7 @@ use namespace::clean;
   );
 
   # Explicitly use the dsn and db_attrs to connect:
-  $dbh = DBI->connect($sqlite->dsn, '', '', $sqlite->db_attrs);
+  my $dbh = DBI->connect($sqlite->dsn, '', '', $sqlite->db_attrs);
   # Fiddle with the test database...
   $dbh->commit;
   $dbh->disconnect;
