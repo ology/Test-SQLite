@@ -115,7 +115,8 @@ has db_attrs => (
 
 =head2 dsn
 
-The database connection string.
+The database connection string.  This is a computed attribute and any
+arguments given to the constructor will be ignored.
 
 =cut
 
@@ -131,7 +132,9 @@ sub _build_dsn {
 
 =head2 dbh
 
-A connected database handle based on the B<dsn> and B<db_attrs>.
+A connected database handle based on the B<dsn> and B<db_attrs>.  This
+is a computed attribute and any arguments given to the constructor
+will be ignored.
 
 =cut
 
