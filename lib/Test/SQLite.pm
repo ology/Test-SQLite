@@ -17,29 +17,21 @@ use namespace::clean;
   use DBI;
   use Test::SQLite;
 
-  # Start with an empty test db:
+  # An empty test db:
   my $sqlite = Test::SQLite->new;
-  my $dbh = $sqlite->dbh;
-  # Fiddle with the test database...
-  $dbh->disconnect;
 
   # Use an in-memory database:
   $sqlite = Test::SQLite->new(memory => 1);
-  $dbh = $sqlite->dbh;
-  # Fiddle with the test database...
-  $dbh->disconnect;
 
   # Copy a database file to the test db:
   $sqlite = Test::SQLite->new(database => '/some/where/database.db');
-  $dbh = $sqlite->dbh;
-  # Fiddle with the test database...
-  $dbh->disconnect;
 
   # Use a schema file to create the test db:
   $sqlite = Test::SQLite->new(
     schema   => '/some/where/schema.sql',
     db_attrs => { RaiseError => 1, AutoCommit => 0 },
   );
+
   # Explicitly use the dsn and db_attrs to connect:
   $dbh = DBI->connect($sqlite->dsn, '', '', $sqlite->db_attrs);
   # Fiddle with the test database...
