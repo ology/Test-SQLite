@@ -19,6 +19,9 @@ use namespace::clean;
 
   # An empty test db:
   my $sqlite = Test::SQLite->new;
+  my $dbh = $sqlite->dbh;
+  # Fiddle with the test database...
+  $dbh->disconnect;
 
   # Use an in-memory test db:
   $sqlite = Test::SQLite->new(memory => 1);
@@ -33,7 +36,7 @@ use namespace::clean;
   );
 
   # Explicitly use the dsn and db_attrs to connect:
-  my $dbh = DBI->connect($sqlite->dsn, '', '', $sqlite->db_attrs);
+  $dbh = DBI->connect($sqlite->dsn, '', '', $sqlite->db_attrs);
   # Fiddle with the test database...
   $dbh->commit;
   $dbh->disconnect;
