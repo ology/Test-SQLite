@@ -1,6 +1,8 @@
 Revision history for Test-SQLite
 
 {{$NEXT}}
+
+0.0409 2020-03-20 20:49:43
     - Do not document the BUILD method.
 
 0.0408 2020-03-20 20:28:41
