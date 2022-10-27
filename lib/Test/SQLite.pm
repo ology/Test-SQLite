@@ -2,7 +2,7 @@ package Test::SQLite;
 
 # ABSTRACT: SQLite setup/teardown for tests
 
-our $VERSION = '0.0409';
+our $VERSION = '0.0410';
 
 use strictures 2;
 use DBI ();
