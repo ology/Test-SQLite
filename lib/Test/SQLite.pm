@@ -4,12 +4,11 @@ package Test::SQLite;
 
 our $VERSION = '0.0409';
 
-use DBI;
-use File::Copy;
-use File::Temp ();
-
-use Moo;
 use strictures 2;
+use DBI ();
+use File::Copy qw(copy);
+use File::Temp ();
+use Moo;
 use namespace::clean;
 
 =head1 SYNOPSIS
